@@ -27,6 +27,22 @@ def delazify(obj: Union[LinearOperator, torch.Tensor]) -> torch.Tensor:
 
 
 def deprecated_lazy_tensor(_LinearOperatorClass: type) -> type:
+    __orig_init__ = getattr(_LinearOperatorClass, "__init__")
+
+    def __init__(self, *args, **kwargs):
+        for name, val in kwargs.items():
+            if "lazy_tensor" in name:
+                new_name = name.replace("lazy_tensor", "linear_op")
+                warnings.warn(
+                    f"The kwarg {name} for {self.__class__.__name__}.__init__ is deprecated. Use "
+                    f"the kwarg {new_name} instead.",
+                    DeprecationWarning,
+                )
+                kwargs[new_name] = val
+                del kwargs[name]
+
+        return __orig_init__(self, *args, **kwargs)
+
     def symeig(self, eigenvectors=False):
         warnings.warn(
             "LazyTensor#symeig has been renamed to LinearOperator#eigh/eigvalsh. "
@@ -57,6 +73,7 @@ def deprecated_lazy_tensor(_LinearOperatorClass: type) -> type:
     _add_deprecated_method(_LinearOperatorClass, "inv_matmul", "solve")
     setattr(_LinearOperatorClass, "symeig", symeig)
     setattr(_LinearOperatorClass, "__getattr__", __getattr__)
+    setattr(_LinearOperatorClass, "__init__", __init__)
     return _LinearOperatorClass
 
 
