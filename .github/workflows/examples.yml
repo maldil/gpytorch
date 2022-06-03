@@ -21,6 +21,8 @@ jobs:
         python-version: "3.7"
     - name: Install dependencies
       run: |
+        pip install torch==1.11+cpu -f https://download.pytorch.org/whl/torch_stable.html;
+        pip install git+https://github.com/cornellius-gp/linear_operator.git@main
         pip install pytest nbval jupyter tqdm matplotlib torchvision scipy
         python setup.py build develop
         pip install "pyro-ppl<=1.8";
