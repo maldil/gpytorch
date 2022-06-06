@@ -1,3 +1,5 @@
-torch>=1.9
+linear_operator @ git+https://github.com/cornellius-gp/linear_operator.git@main
+numpy
 scikit-learn
 scipy
+torch>=1.11

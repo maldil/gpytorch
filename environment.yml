@@ -3,5 +3,8 @@ channels:
   - pytorch
 dependencies:
   - pytorch
+  - numpy
   - scikit-learn
   - scipy
+  - pip:
+    - git+https://github.com/cornellius-gp/linear_operator.git@main

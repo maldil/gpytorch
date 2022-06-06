@@ -30,6 +30,7 @@ def deprecated_lazy_tensor(_LinearOperatorClass: type) -> type:
     __orig_init__ = getattr(_LinearOperatorClass, "__init__")
 
     def __init__(self, *args, **kwargs):
+        new_kwargs = dict()
         for name, val in kwargs.items():
             if "lazy_tensor" in name:
                 new_name = name.replace("lazy_tensor", "linear_op")
@@ -38,10 +39,11 @@ def deprecated_lazy_tensor(_LinearOperatorClass: type) -> type:
                     f"the kwarg {new_name} instead.",
                     DeprecationWarning,
                 )
-                kwargs[new_name] = val
-                del kwargs[name]
+                new_kwargs[new_name] = val
+            else:
+                new_kwargs[name] = val
 
-        return __orig_init__(self, *args, **kwargs)
+        return __orig_init__(self, *args, **new_kwargs)
 
     def symeig(self, eigenvectors=True):
         warnings.warn(

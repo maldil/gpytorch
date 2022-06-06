@@ -59,7 +59,7 @@ setup(
     license="MIT",
     classifiers=["Development Status :: 4 - Beta", "Programming Language :: Python :: 3"],
     packages=find_packages(exclude=["test", "test.*"]),
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=install_requires,
     extras_require={
         "dev": ["black", "twine", "pre-commit"],
