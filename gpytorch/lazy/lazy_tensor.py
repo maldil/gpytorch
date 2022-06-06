@@ -43,7 +43,7 @@ def deprecated_lazy_tensor(_LinearOperatorClass: type) -> type:
 
         return __orig_init__(self, *args, **kwargs)
 
-    def symeig(self, eigenvectors=False):
+    def symeig(self, eigenvectors=True):
         warnings.warn(
             "LazyTensor#symeig has been renamed to LinearOperator#eigh/eigvalsh. "
             "(eigh replaces symeig(eigenvectors=True); eigvalsh replaces symeig(eigenvectors=False).)",
