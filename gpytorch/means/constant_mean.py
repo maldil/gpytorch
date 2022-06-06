@@ -2,7 +2,6 @@
 
 import torch
 
-from ..utils.broadcasting import _mul_broadcast_shape
 from .mean import Mean
 
 
@@ -24,4 +23,4 @@ class ConstantMean(Mean):
         if input.shape[:-2] == self.batch_shape:
             return self.constant.expand(input.shape[:-1])
         else:
-            return self.constant.expand(_mul_broadcast_shape(input.shape[:-1], self.constant.shape))
+            return self.constant.expand(torch.broadcast_shapes(input.shape[:-1], self.constant.shape))
