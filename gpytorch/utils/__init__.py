@@ -7,12 +7,11 @@ from typing import Any
 
 import linear_operator
 
-from . import cholesky, deprecation, errors, grid, interpolation, quadrature, transforms, warnings
+from . import deprecation, errors, grid, interpolation, quadrature, transforms, warnings
 from .memoize import cached
 
 __all__ = [
     "cached",
-    "cholesky",
     "deprecation",
     "errors",
     "grid",
