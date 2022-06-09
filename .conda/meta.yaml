@@ -13,12 +13,16 @@ build:
 
 requirements:
   host:
-    - python>=3.6
+    - python>=3.8
 
   run:
-    - pytorch>=1.9
+    - pytorch>=1.11
+    - numpy
     - scikit-learn
     - scipy
+    - pip:
+      - git+https://github.com/cornellius-gp/linear_operator.git@main
+
 
 test:
   imports:
